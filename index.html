@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Marriage Biodata Maker</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      background: #7b1e3b;
+      color: white;
+      padding: 25px 15px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 15px;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 30px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      color: #7b1e3b;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    input,
+    select,
+    textarea {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      font-size: 15px;
+      width: 100%;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .button-area {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    button {
+      background: #7b1e3b;
+      color: white;
+      border: none;
+      padding: 13px 25px;
+      border-radius: 7px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    button:hover {
+      background: #5e162d;
+    }
+
+    .preview {
+      display: none;
+      margin-top: 30px;
+      border: 2px solid #7b1e3b;
+      padding: 30px;
+      background: white;
+    }
+
+    .preview h1 {
+      text-align: center;
+      color: #7b1e3b;
+      margin-bottom: 25px;
+    }
+
+    .preview-section {
+      margin-bottom: 20px;
+    }
+
+    .preview-section h3 {
+      color: #7b1e3b;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 6px;
+      margin-bottom: 10px;
+    }
+
+    .row {
+      display: flex;
+      padding: 6px 0;
+    }
+
+    .row strong {
+      width: 180px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #777;
+      font-size: 14px;
+    }
+
+    @media(max-width: 650px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .container {
+        margin: 15px;
+        padding: 18px;
+      }
+
+      .row {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .row strong {
+        display: block;
+        width: auto;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      header,
+      form,
+      .button-area,
+      footer {
+        display: none;
+      }
+
+      .container {
+        box-shadow: none;
+        margin: 0;
+        max-width: 100%;
+      }
+
+      .preview {
+        display: block !important;
+        border: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Marriage Biodata Maker</h1>
+  <p>Create a beautiful marriage biodata easily</p>
+</header>
+
+<div class="container">
+
+  <form id="biodataForm">
+
+    <h2>Personal Details</h2>
+
+    <div class="grid">
+
+      <div class="field">
+        <label>Full Name</label>
+        <input type="text" id="name" required>
+      </div>
+
+      <div class="field">
+        <label>Gender</label>
+        <select id="gender">
+          <option>Male</option>
+          <option>Female</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Date of Birth</label>
+        <input type="date" id="dob">
+      </div>
+
+      <div class="field">
+        <label>Age</label>
+        <input type="number" id="age">
+      </div>
+
+      <div class="field">
+        <label>Height</label>
+        <input type="text" id="height" placeholder="e.g. 5'6&quot;">
+      </div>
+
+      <div class="field">
+        <label>Religion</label>
+        <input type="text" id="religion">
+      </div>
+
+      <div class="field">
+        <label>Mother Tongue</label>
+        <input type="text" id="language">
+      </div>
+
+      <div class="field">
+        <label>Marital Status</label>
+        <select id="status">
+          <option>Never Married</option>
+          <option>Divorced</option>
+          <option>Widowed</option>
+        </select>
+      </div>
+
+    </div>
+
+    <br>
+
+    <h2>Education & Career</h2>
+
+    <div class="grid">
+
+      <div class="field">
+        <label>Education</label>
+        <input type="text" id="education">
+      </div>
+
+      <div class="field">
+        <label>Occupation</label>
+        <input type="text" id="occupation">
+      </div>
+
+      <div class="field">
+        <label>Company / Business</label>
+        <input type="text" id="company">
+      </div>
+
+      <div class="field">
+        <label>Annual Income</label>
+        <input type="text" id="income">
+      </div>
+
+    </div>
+
+    <br>
+
+    <h2>Family Details</h2>
+
+    <div class="grid">
+
+      <div class="field">
+        <label>Father's Name</label>
+        <input type="text" id="father">
+      </div>
+
+      <div class="field">
+        <label>Mother's Name</label>
+        <input type="text" id="mother">
+      </div>
+
+      <div class="field">
+        <label>Father's Occupation</label>
+        <input type="text" id="fatherOccupation">
+      </div>
+
+      <div class="field">
+        <label>Number of Brothers</label>
+        <input type="number" id="brothers">
+      </div>
+
+      <div class="field">
+        <label>Number of Sisters</label>
+        <input type="number" id="sisters">
+      </div>
+
+      <div class="field full">
+        <label>Family Details</label>
+        <textarea id="familyDetails"></textarea>
+      </div>
+
+    </div>
+
+    <br>
+
+    <h2>Contact Details</h2>
+
+    <div class="grid">
+
+      <div class="field">
+        <label>Mobile Number</label>
+        <input type="tel" id="mobile">
+      </div>
+
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="email">
+      </div>
+
+      <div class="field full">
+        <label>Address</label>
+        <textarea id="address"></textarea>
+      </div>
+
+    </div>
+
+    <div class="button-area">
+      <button type="submit">Create Biodata</button>
+      <button type="button" onclick="window.print()">Download / Print PDF</button>
+    </div>
+
+  </form>
+
+
+  <div class="preview" id="preview">
+
+    <h1>Marriage Biodata</h1>
+
+    <div class="preview-section">
+      <h3>Personal Details</h3>
+
+      <div class="row">
+        <strong>Name:</strong>
+        <span id="pName"></span>
+      </div>
+
+      <div class="row">
+        <strong>Gender:</strong>
+        <span id="pGender"></span>
+      </div>
+
+      <div class="row">
+        <strong>Date of Birth:</strong>
+        <span id="pDob"></span>
+      </div>
+
+      <div class="row">
+        <strong>Age:</strong>
+        <span id="pAge"></span>
+      </div>
+
+      <div class="row">
+        <strong>Height:</strong>
+        <span id="pHeight"></span>
+      </div>
+
+      <div class="row">
+        <strong>Religion:</strong>
+        <span id="pReligion"></span>
+      </div>
+
+      <div class="row">
+        <strong>Mother Tongue:</strong>
+        <span id="pLanguage"></span>
+      </div>
+
+      <div class="row">
+        <strong>Marital Status:</strong>
+        <span id="pStatus"></span>
+      </div>
+    </div>
+
+
+    <div class="preview-section">
+      <h3>Education & Career</h3>
+
+      <div class="row">
+        <strong>Education:</strong>
+        <span id="pEducation"></span>
+      </div>
+
+      <div class="row">
+        <strong>Occupation:</strong>
+        <span id="pOccupation"></span>
+      </div>
+
+      <div class="row">
+        <strong>Company:</strong>
+        <span id="pCompany"></span>
+      </div>
+
+      <div class="row">
+        <strong>Annual Income:</strong>
+        <span id="pIncome"></span>
+      </div>
+    </div>
+
+
+    <div class="preview-section">
+      <h3>Family Details</h3>
+
+      <div class="row">
+        <strong>Father's Name:</strong>
+        <span id="pFather"></span>
+      </div>
+
+      <div class="row">
+        <strong>Mother's Name:</strong>
+        <span id="pMother"></span>
+      </div>
+
+      <div class="row">
+        <strong>Father's Occupation:</strong>
+        <span id="pFatherOccupation"></span>
+      </div>
+
+      <div class="row">
+        <strong>Brothers:</strong>
+        <span id="pBrothers"></span>
+      </div>
+
+      <div class="row">
+        <strong>Sisters:</strong>
+        <span id="pSisters"></span>
+      </div>
+
+      <div class="row">
+        <strong>Family Details:</strong>
+        <span id="pFamilyDetails"></span>
+      </div>
+    </div>
+
+
+    <div class="preview-section">
+      <h3>Contact Details</h3>
+
+      <div class="row">
+        <strong>Mobile:</strong>
+        <span id="pMobile"></span>
+      </div>
+
+      <div class="row">
+        <strong>Email:</strong>
+        <span id="pEmail"></span>
+      </div>
+
+      <div class="row">
+        <strong>Address:</strong>
+        <span id="pAddress"></span>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 Marriage Biodata Maker
+</footer>
+
+
+<script>
+
+document.getElementById("biodataForm").addEventListener("submit", function(e) {
+
+  e.preventDefault();
+
+  document.getElementById("pName").textContent =
+    document.getElementById("name").value;
+
+  document.getElementById("pGender").textContent =
+    document.getElementById("gender").value;
+
+  document.getElementById("pDob").textContent =
+    document.getElementById("dob").value;
+
+  document.getElementById("pAge").textContent =
+    document.getElementById("age").value;
+
+  document.getElementById("pHeight").textContent =
+    document.getElementById("height").value;
+
+  document.getElementById("pReligion").textContent =
+    document.getElementById("religion").value;
+
+  document.getElementById("pLanguage").textContent =
+    document.getElementById("language").value;
+
+  document.getElementById("pStatus").textContent =
+    document.getElementById("status").value;
+
+  document.getElementById("pEducation").textContent =
+    document.getElementById("education").value;
+
+  document.getElementById("pOccupation").textContent =
+    document.getElementById("occupation").value;
+
+  document.getElementById("pCompany").textContent =
+    document.getElementById("company").value;
+
+  document.getElementById("pIncome").textContent =
+    document.getElementById("income").value;
+
+  document.getElementById("pFather").textContent =
+    document.getElementById("father").value;
+
+  document.getElementById("pMother").textContent =
+    document.getElementById("mother").value;
+
+  document.getElementById("pFatherOccupation").textContent =
+    document.getElementById("fatherOccupation").value;
+
+  document.getElementById("pBrothers").textContent =
+    document.getElementById("brothers").value;
+
+  document.getElementById("pSisters").textContent =
+    document.getElementById("sisters").value;
+
+  document.getElementById("pFamilyDetails").textContent =
+    document.getElementById("familyDetails").value;
+
+  document.getElementById("pMobile").textContent =
+    document.getElementById("mobile").value;
+
+  document.getElementById("pEmail").textContent =
+    document.getElementById("email").value;
+
+  document.getElementById("pAddress").textContent =
+    document.getElementById("address").value;
+
+  document.getElementById("preview").style.display = "block";
+
+  document.getElementById("preview").scrollIntoView({
+    behavior: "smooth"
+  });
+
+});
+
+</script>
+
+</body>
+</html>
